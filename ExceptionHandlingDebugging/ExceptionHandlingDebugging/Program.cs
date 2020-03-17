@@ -22,8 +22,14 @@ namespace ExceptionHandlingDebugging
             Populate(numArray);
             int sumNumb = GetSum(numArray);
             int product = GetProduct(numArray, sumNumb);
-            GetQuotient(product);
+            Decimal quotient = GetQuotient(product);
 
+                Console.WriteLine($"Your array size is {userInput}");
+                Console.WriteLine($"The numbers in the array are {String.Join(", ", numArray)}");
+                Console.WriteLine($"The sum of the array is {sumNumb}");
+                Console.WriteLine($"{sumNumb} * {product/sumNumb} = {product}");
+                Console.WriteLine($"{product} / {product/quotient} = {quotient}");
+               
             }
             catch (FormatException e)
             {
@@ -32,6 +38,11 @@ namespace ExceptionHandlingDebugging
             catch (OverflowException e)
             {
                 Console.WriteLine($"Your Overflow Exception is: {e.Message}");
+            }
+            finally
+            {
+                Console.WriteLine("The program is complete.");
+                Console.ReadLine();
             }
         }
         
@@ -68,18 +79,40 @@ namespace ExceptionHandlingDebugging
         // The number they chose is multiplied by the number they chose. 
         static int GetProduct(int[] productArray, int sum)
         {
+            try
+            {
+
             Console.WriteLine($"Please select a random number between 1 and {productArray.Length}");
             int randomNum = Convert.ToInt32(Console.ReadLine());
-            int product = sum * randomNum;
+            int product = sum * productArray[randomNum - 1];
             return product;
+
+            }
+            catch (IndexOutOfRangeException e)
+            {
+                Console.WriteLine($"Sorry! {e.Message}");
+                throw;
+            }
         }
 
-        //static decimal GetQuotient(int num)
-        //{ 
-        //    Console.WriteLine($"Please enter a number to divide your product {num} by");
-        //    int inputNum = Convert.ToInt32(Console.ReadLine());
+        // User prompted to enter a number so it can be divided by the already stated product.
+        static decimal GetQuotient(int num)
+        {
+            try
+            {
 
-        //}
+            Console.WriteLine($"Please enter a number to divide your product {num} by");
+            int inputNum = Convert.ToInt32(Console.ReadLine());
+            Decimal number = Decimal.Divide(num, inputNum);
+            return number;
+
+            }
+            catch (DivideByZeroException e)
+            {
+                Console.WriteLine($"Sorry! You cannot do that! {e.Message}");
+                return 0;
+            }
+        }
 
 
     }
