@@ -32,11 +32,15 @@ namespace ExceptionHandlingDebugging
             Console.WriteLine("Enter a number greater than zero.");
             int userInput = Convert.ToInt32(Console.ReadLine());
             int[] numArray = new int[userInput];
+
+            // This is where all the other methods are called
             Populate(numArray);
             int sumNumb = GetSum(numArray);
             int product = GetProduct(numArray, sumNumb);
             Decimal quotient = GetQuotient(product);
 
+                
+                // This displays at the end after all of the inputs are entered in.
                 Console.WriteLine($"Your array size is {userInput}");
                 Console.WriteLine($"The numbers in the array are {String.Join(", ", numArray)}");
                 Console.WriteLine($"The sum of the array is {sumNumb}");
@@ -97,6 +101,7 @@ namespace ExceptionHandlingDebugging
             return product;
 
             }
+            // this catch is for if user inputs a number outside of the range
             catch (IndexOutOfRangeException e)
             {
                 Console.WriteLine($"Sorry! {e.Message}");
