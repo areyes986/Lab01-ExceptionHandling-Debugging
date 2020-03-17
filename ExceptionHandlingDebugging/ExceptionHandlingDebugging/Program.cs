@@ -7,7 +7,20 @@ namespace ExceptionHandlingDebugging
         static void Main(string[] args)
         {
             Console.WriteLine("Welcome to my game! Let's do some math!");
-            StartSequence();
+            try
+            {
+                StartSequence();
+            }
+            catch (Exception e)
+            {
+                // did not output the message to not express vulnerability
+                Console.WriteLine($"Sorry! Something went wrong!");
+            }
+            finally
+            {
+            Console.WriteLine("Program is complete.");
+            Console.ReadLine();
+            }
         }
 
         //StartSequence Method
@@ -39,11 +52,7 @@ namespace ExceptionHandlingDebugging
             {
                 Console.WriteLine($"Your Overflow Exception is: {e.Message}");
             }
-            finally
-            {
-                Console.WriteLine("The program is complete.");
-                Console.ReadLine();
-            }
+
         }
         
         // User inputs the number of elements into the array and is asked to enter a number array.length times
