@@ -74,7 +74,7 @@ namespace ExceptionHandlingDebugging
         // The console iterates through the array to get the sum of the elements. 
         // If the sum is less than 20, console tells them the sum is too low.
         static int GetSum(int[] sumarray)
-        {
+        { 
             int sum = 0;
             for (int i = 0; i < sumarray.Length; i++)
             {
@@ -83,7 +83,7 @@ namespace ExceptionHandlingDebugging
 
             if (sum < 20)
             {
-                Console.WriteLine($"Value of {sum} is too low");
+                throw new Exception($"Value of {sum} is too low");
             }
             return sum;
         }
